@@ -1,8 +1,243 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FXNESS — Trading Workspace</title><link rel="stylesheet" href="styles.css"></head>
-<body>
-<div id="toast" class="toast"></div>
-<section id="landing" class="landing"><header><a class="logo" href="#">F<span>FXNESS</span></a><nav><a href="#features">Features</a><a href="#markets-preview">Markets</a></nav><div><button class="btn ghost" data-action="login">Log in</button><button class="btn primary" data-action="register">Create account</button></div></header><main><section class="hero"><div><small class="eyebrow">SIMULATED MARKETS · RISK-FREE PRACTICE</small><h1>Trade with clarity.<br><em>Build your edge.</em></h1><p>Practice forex and metals trading with a focused workspace, simulated quotes and instant buy/sell orders.</p><button class="btn primary large" data-action="register">Start trading <b>→</b></button></div><div class="hero-chart"><div class="chart-head"><b>EUR/USD</b><span class="up">+0.42%</span></div><strong>1.0842</strong><svg class="chart" viewBox="0 0 500 220"><path class="grid" d="M0 30h500M0 80h500M0 130h500M0 180h500M80 0v220M180 0v220M280 0v220M380 0v220"/><path class="fill" d="M0 178C35 160 55 130 90 150S125 110 160 130S195 70 230 108S270 120 305 72S340 95 375 50S420 70 500 18V220H0Z"/><path class="line" d="M0 178C35 160 55 130 90 150S125 110 160 130S195 70 230 108S270 120 305 72S340 95 375 50S420 70 500 18"/></svg><div class="chart-tabs"><span>1D</span><span>1W</span><b>1M</b><span>1Y</span></div></div></section><section id="features" class="features"><article><i>↗</i><h3>Practice without pressure</h3><p>Open and close simulated positions with no real money involved.</p></article><article><i>◈</i><h3>Clear market view</h3><p>Compare bid and ask prices before choosing buy or sell.</p></article><article><i>✓</i><h3>Learn risk control</h3><p>Set entry, stop-loss and take-profit levels for every trade.</p></article></section><section id="markets-preview" class="preview"><small class="eyebrow">MARKET WATCH</small><h2>Markets in focus</h2><div id="preview-quotes" class="quote-grid"></div></section></main><footer>FXNESS · Paper trading for educational purposes. No real deposits, withdrawals or financial transactions.</footer></section>
-<section id="auth" class="auth hidden"><div class="auth-box"><a class="logo" href="#" data-action="landing">F<span>FXNESS</span></a><div id="login-box"><small class="eyebrow">WELCOME BACK</small><h1>Log in</h1><form id="login-form"><label>Email<input id="login-email" type="email" required></label><label>Password<input id="login-password" type="password" required></label><button class="btn primary full">Log in</button></form><p>New to FXNESS? <button class="link" data-action="register">Create an account</button></p></div><div id="register-box" class="hidden"><small class="eyebrow">GET STARTED</small><h1>Create account</h1><form id="register-form"><label>Full name<input id="reg-name" required></label><label>Email<input id="reg-email" type="email" required></label><label>Password<input id="reg-password" type="password" minlength="6" required></label><label>Confirm password<input id="reg-confirm" type="password" required></label><button class="btn primary full">Create account</button></form><p>Already registered? <button class="link" data-action="login">Log in</button></p></div><small class="disclaimer">Paper Trading only. Quotes and orders are simulated.</small></div></section>
-<section id="app" class="hidden"><aside><a class="logo" href="#">F<span>FXNESS</span></a><b class="badge">PAPER TRADING</b><nav class="side"><button data-page="dashboard">⌂ Overview</button><button data-page="markets">◌ Markets</button><button data-page="trade">＋ Trade</button><button data-page="positions">◒ Positions <sup id="count">0</sup></button><button data-page="transactions">↔ Transactions</button><hr><button data-page="profile">◎ Profile</button><button data-page="settings">⚙ Settings</button></nav><button class="logout" data-action="logout">↪ Log out</button></aside><main class="workspace"><header class="top"><button class="hamb" data-action="menu">☰</button><span>Workspace / <b id="page-name">Overview</b></span><span class="user" id="user-name"></span></header><div id="screen"></div></main></section><script src="script.js"></script></body></html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="FXNESS trading platform prototype" />
+    <title>FXNESS | Trading Platform</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+
+    <section id="landing" class="landing-shell">
+      <header class="topbar container">
+        <a class="brand" href="#landing" data-action="landing">
+          <span class="brand-mark">F</span>
+          <span>FXNESS</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#features" data-scroll="features">Features</a>
+          <a href="#markets-preview" data-scroll="markets-preview">Markets</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="btn btn-ghost" data-action="login">Log in</button>
+          <button class="btn btn-primary" data-action="register">Create account</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero container">
+          <div class="hero-copy">
+            <small class="eyebrow">PAPER TRADING · KSH DENOMINATED</small>
+            <h1>Trade with clarity.<br /><span>Build your edge.</span></h1>
+            <p>
+              FXNESS is a professional-style trading workspace built for practice.
+              Track live-feeling market data, open simulated forex positions and
+              review your performance in KSh.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-lg" data-action="register">Start trading</button>
+              <button class="btn btn-ghost btn-lg" data-action="login">Log in</button>
+            </div>
+            <div class="hero-meta">
+              <span>✔ No real deposits</span>
+              <span>✔ KSh-based practice account</span>
+            </div>
+          </div>
+
+          <div class="chart-box">
+            <div class="chart-top">
+              <div>
+                <small>EUR/USD</small>
+                <strong>1.0842</strong>
+              </div>
+              <span class="gain">+0.42%</span>
+            </div>
+
+            <svg viewBox="0 0 500 220" aria-label="Market chart illustration" class="mini-chart">
+              <path d="M0 30h500M0 80h500M0 130h500M0 180h500M80 0v220M180 0v220M280 0v220M380 0v220" class="chart-grid"/>
+              <path d="M0 170C35 156 55 138 90 145S125 112 160 126S195 74 230 107S270 120 305 82S345 96 380 58S420 74 500 20V220H0Z" class="chart-fill"/>
+              <path d="M0 170C35 156 55 138 90 145S125 112 160 126S195 74 230 107S270 120 305 82S345 96 380 58S420 74 500 20" class="chart-line"/>
+            </svg>
+
+            <div class="chart-bottom">
+              <span>1D</span>
+              <span>1W</span>
+              <span class="active">1M</span>
+              <span>1Y</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="trust-bar">
+          <div class="container trust-inner">
+            <span>Forex</span>
+            <span>Metals</span>
+            <span>Risk management</span>
+            <span>Paper trading</span>
+          </div>
+        </section>
+
+        <section id="features" class="container features-section">
+          <div class="section-heading">
+            <div>
+              <small class="eyebrow">WHY FXNESS</small>
+              <h2>Smarter practice for serious traders</h2>
+            </div>
+            <p>Everything needed to build discipline, test ideas and track performance.</p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <span class="feature-icon icon-blue">↗</span>
+              <h3>Practice without pressure</h3>
+              <p>Open and manage simulated positions in KSh while you test strategy.</p>
+            </article>
+            <article class="feature-card">
+              <span class="feature-icon icon-purple">◈</span>
+              <h3>See the full picture</h3>
+              <p>Balance, open positions, P/L and recent activity all in one place.</p>
+            </article>
+            <article class="feature-card">
+              <span class="feature-icon icon-green">✓</span>
+              <h3>Trade with discipline</h3>
+              <p>Set stop-loss and take-profit before every order to improve risk control.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="markets-preview" class="markets-preview">
+          <div class="container">
+            <div class="section-heading compact">
+              <div>
+                <small class="eyebrow">MARKET WATCH</small>
+                <h2>Markets in focus</h2>
+              </div>
+              <span class="live-indicator">● Simulated feed</span>
+            </div>
+            <div id="preview-quotes" class="preview-grid"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <span class="brand small-brand"><span class="brand-mark">F</span><span>FXNESS</span></span>
+          <span>© 2025 FXNESS. Paper trading for educational purposes.</span>
+          <span>Not financial advice.</span>
+        </div>
+      </footer>
+    </section>
+
+    <section id="auth" class="auth-shell hidden">
+      <div class="auth-panel">
+        <a class="brand auth-brand" href="#landing" data-action="landing">
+          <span class="brand-mark">F</span>
+          <span>FXNESS</span>
+        </a>
+
+        <div id="login-box" class="auth-card">
+          <small class="eyebrow">WELCOME BACK</small>
+          <h1>Log in to FXNESS</h1>
+          <form id="login-form">
+            <label>
+              Email
+              <input id="login-email" type="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Password
+              <input id="login-password" type="password" placeholder="••••••••" required />
+            </label>
+            <button class="btn btn-primary btn-full" type="submit">Log in</button>
+          </form>
+          <p class="switch-line">
+            New to FXNESS?
+            <button class="link-btn" data-action="register">Create account</button>
+          </p>
+        </div>
+
+        <div id="register-box" class="auth-card hidden">
+          <small class="eyebrow">CREATE ACCOUNT</small>
+          <h1>Open your practice account</h1>
+          <form id="register-form">
+            <label>
+              Full name
+              <input id="reg-name" type="text" placeholder="Alex Morgan" required />
+            </label>
+            <label>
+              Email
+              <input id="reg-email" type="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Password
+              <input id="reg-password" type="password" placeholder="At least 6 characters" minlength="6" required />
+            </label>
+            <label>
+              Confirm password
+              <input id="reg-confirm" type="password" placeholder="Repeat password" minlength="6" required />
+            </label>
+            <button class="btn btn-primary btn-full" type="submit">Create account</button>
+          </form>
+          <p class="switch-line">
+            Already registered?
+            <button class="link-btn" data-action="login">Return to login</button>
+          </p>
+        </div>
+
+        <p class="auth-note">Paper Trading only. No real financial transactions or deposits are processed.</p>
+      </div>
+    </section>
+
+    <section id="app" class="app-shell hidden">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top">
+          <a class="brand" href="#dashboard" data-page="dashboard">
+            <span class="brand-mark">F</span>
+            <span>FXNESS</span>
+          </a>
+          <span class="badge">PAPER TRADING</span>
+        </div>
+
+        <nav class="side-nav" aria-label="Dashboard navigation">
+          <button class="nav-link active" data-page="dashboard">⌂ Overview</button>
+          <button class="nav-link" data-page="markets">◌ Markets</button>
+          <button class="nav-link" data-page="trade">＋ Trade</button>
+          <button class="nav-link" data-page="positions">◒ Positions <span id="positions-count" class="count-pill">0</span></button>
+          <button class="nav-link" data-page="transactions">↔ Transactions</button>
+          <span class="nav-label">ACCOUNT</span>
+          <button class="nav-link" data-page="profile">◎ Profile</button>
+          <button class="nav-link" data-page="settings">⚙ Settings</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="user-mini">
+            <span class="avatar" id="sidebar-avatar">A</span>
+            <div>
+              <strong id="sidebar-name">Trader</strong>
+              <small>FXNESS practice</small>
+            </div>
+            <button class="logout-btn" data-action="logout" aria-label="Logout">↪</button>
+          </div>
+        </div>
+      </aside>
+
+      <div class="app-main">
+        <header class="app-header">
+          <button class="mobile-btn" data-action="menu" aria-label="Open menu">☰</button>
+          <div class="crumbs">Workspace / <strong id="page-name">Overview</strong></div>
+          <div class="header-tools">
+            <span class="market-status">● Market open</span>
+            <button class="header-avatar" id="header-avatar" data-page="profile">A</button>
+          </div>
+        </header>
+
+        <main id="screen" class="screen"></main>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
